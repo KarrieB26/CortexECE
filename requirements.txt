@@ -1,0 +1,8 @@
+faiss-cpu
+openai
+pymupdf
+streamlit
+rank-bm25
+numpy
+pandas
+tqdm
