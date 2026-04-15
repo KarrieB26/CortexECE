@@ -6,3 +6,8 @@ rank-bm25
 numpy
 pandas
 tqdm
+fastapi
+uvicorn
+easyocr
+pytesseract
+opencv-python
