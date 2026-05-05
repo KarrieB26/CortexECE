@@ -1,0 +1,8 @@
+ESP32 Microcontroller Specifications
+
+Voltage = 3.3V
+Current = 240mA
+Frequency = 240MHz
+
+The ESP32 includes built-in WiFi and Bluetooth capabilities.
+It is widely used for wireless IoT applications.

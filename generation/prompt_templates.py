@@ -5,6 +5,10 @@ This module defines all prompt components used to build
 a strict-but-flexible grounded QA prompt for the LLM.
 """
 
+# =========================
+# 🧠 SYSTEM PROMPT (QA)
+# =========================
+
 SYSTEM_PROMPT = """
 You are a grounded question-answering assistant.
 
@@ -12,13 +16,11 @@ You MUST follow these rules:
 - Use ONLY the provided context to answer
 - Do NOT use outside knowledge unless it is necessary to connect ideas within the context
 - If the context does not contain enough information for a full answer, clearly state that limitation
-- You may combine information from multiple chunks to form a complete answer
+- You may combine information from multiple chunks ONLY if explicitly supported by them
 - Do NOT fabricate facts not supported by the context
 - Be precise, factual, and concise
-- After answering, always include a SOURCES section mapping citation numbers to chunk_ids. Do not omit it.
-- Do not merge multiple concepts into a single sentence if they come from different sources unless explicitly supported by both chunks.
-- Prefer one concept per sentence.
-- You may synthesize information across multiple chunks to produce natural, conversational explanations, as long as all claims are supported by the context.
+- Always include a SOURCES section mapping citation numbers to chunk_ids
+- Prefer one concept per sentence
 """.strip()
 
 
@@ -33,9 +35,12 @@ CONTEXT:
 """.strip()
 
 
-# Each chunk is formatted like this
+# =========================
+# 🧩 CHUNK FORMAT
+# =========================
+
 CHUNK_TEMPLATE = """
-[{index}] 
+[{index}]
 chunk_id: {chunk_id}
 file: {file_name}
 page: {page_number}
@@ -43,26 +48,29 @@ text: {text}
 """.strip()
 
 
+# =========================
+# ❓ QUESTION FORMAT
+# =========================
+
 QUESTION_TEMPLATE = """
 QUESTION:
 {query}
 """.strip()
 
 
+# =========================
+# 📊 OUTPUT RULES
+# =========================
+
 OUTPUT_RULES = """
 OUTPUT FORMAT RULES:
 
-- Answer in clear, natural, fluent sentences
-- You may combine multiple related facts into a single sentence
-- Use numbered citations like [1], [2] for supporting evidence
-- Citations can refer to multiple chunks if they jointly support the idea
-- Prefer fluency over strict one-fact-per-sentence structure
-- Do NOT fabricate any information not present in the context
+- Answer in clear, natural sentences
+- Every factual sentence must include citation [1], [2], etc.
+- You may combine facts ONLY when supported by multiple chunks
+- Do NOT fabricate or assume missing information
 - If context is insufficient, say: "Insufficient information in provided context"
-
-IMPORTANT:
-Still ensure every factual claim is supported by at least one citation.
-After the answer, output a "SOURCES" section in this format:
+- Always include a SOURCES section:
 
 SOURCES:
 [1] chunk_id
@@ -70,6 +78,10 @@ SOURCES:
 [3] chunk_id
 """.strip()
 
+
+# =========================
+# 🧠 PROMPT TEMPLATE
+# =========================
 
 FULL_PROMPT_TEMPLATE = """
 {system}
@@ -83,49 +95,66 @@ FULL_PROMPT_TEMPLATE = """
 
 
 # =========================
+# 🧪 EXTRACTION PROMPT (PHASE 5)
+# =========================
+
+EXTRACTION_PROMPT_TEMPLATE = """
+You are a structured information extraction system.
+
+Extract the following fields from the context:
+
+- voltage
+- current
+- frequency
+
+Rules:
+- Return ONLY valid JSON
+- Do NOT include explanations
+- If a field is missing, use null
+- Preserve units when possible
+- Be precise and faithful to the text
+
+Output format:
+{{
+  "voltage": "...",
+  "current": "...",
+  "frequency": "..."
+}}
+
+CONTEXT:
+{context}
+""".strip()
+
+
+# =========================
 # 🔧 HELPERS
 # =========================
 
 def format_chunks(chunks):
     """
-    Converts retrieved chunks into structured prompt context
-    AND assigns citation numbers [1], [2], [3]...
+    Converts retrieved chunks into structured context with citations.
     """
 
     formatted = []
 
     for i, chunk in enumerate(chunks, start=1):
-        formatted_chunk = CHUNK_TEMPLATE.format(
-            index=f"[{i}]",
+        formatted.append(CHUNK_TEMPLATE.format(
+            index=i,
             chunk_id=chunk["chunk_id"],
             file_name=chunk["file_name"],
             page_number=chunk["page_number"],
             text=chunk["text"]
-        )
-        formatted.append(formatted_chunk)
+        ))
 
     return "\n\n".join(formatted)
 
 
 def build_prompt(query, chunks):
     """
-    Builds final prompt for LLM using system + context + question + rules.
+    Builds final grounded QA prompt.
     """
 
-    formatted = []
-
-    for i, chunk in enumerate(chunks, start=1):
-        formatted_chunk = f"""
-[{i}]
-chunk_id: {chunk["chunk_id"]}
-file: {chunk["file_name"]}
-page: {chunk["page_number"]}
-text: {chunk["text"]}
-""".strip()
-
-        formatted.append(formatted_chunk)
-
-    context = "\n\n".join(formatted)
+    context = format_chunks(chunks)
 
     return FULL_PROMPT_TEMPLATE.format(
         system=SYSTEM_PROMPT,

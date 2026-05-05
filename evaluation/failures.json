@@ -1,0 +1,156 @@
+[
+  {
+    "query": "What is voltage?",
+    "error_type": "retrieval",
+    "retrieved": [
+      "doc1.pdf_def_voltage",
+      "doc1.pdf_p3_c0"
+    ],
+    "expected": [
+      "doc1.pdf_def_voltage"
+    ]
+  },
+  {
+    "query": "What does Ohm's law state?",
+    "error_type": "retrieval",
+    "retrieved": [
+      "doc1.pdf_def_voltage",
+      "doc1.pdf_p3_c0"
+    ],
+    "expected": [
+      "doc1.pdf_p3_c0"
+    ]
+  },
+  {
+    "query": "What is voltage?",
+    "error_type": "retrieval",
+    "retrieved": [
+      "doc1.pdf_def_voltage",
+      "doc1.pdf_p3_c0"
+    ],
+    "expected": [
+      "doc1.pdf_def_voltage"
+    ]
+  },
+  {
+    "query": "What does Ohm's law state?",
+    "error_type": "retrieval",
+    "retrieved": [
+      "doc1.pdf_def_voltage",
+      "doc1.pdf_p3_c0"
+    ],
+    "expected": [
+      "doc1.pdf_p3_c0"
+    ]
+  },
+  {
+    "query": "What is voltage?",
+    "error_type": "retrieval",
+    "retrieved": [
+      "doc1.pdf_def_voltage",
+      "doc1.pdf_p3_c0"
+    ],
+    "expected": [
+      "doc1.pdf_def_voltage"
+    ]
+  },
+  {
+    "query": "What does Ohm's law state?",
+    "error_type": "retrieval",
+    "retrieved": [
+      "doc1.pdf_def_voltage",
+      "doc1.pdf_p3_c0"
+    ],
+    "expected": [
+      "doc1.pdf_p3_c0"
+    ]
+  },
+  {
+    "query": "What is voltage?",
+    "error_type": "retrieval",
+    "retrieved": [
+      "doc1.pdf_def_voltage",
+      "doc1.pdf_p3_c0"
+    ],
+    "expected": [
+      "doc1.pdf_def_voltage"
+    ]
+  },
+  {
+    "query": "What does Ohm's law state?",
+    "error_type": "retrieval",
+    "retrieved": [
+      "doc1.pdf_def_voltage",
+      "doc1.pdf_p3_c0"
+    ],
+    "expected": [
+      "doc1.pdf_p3_c0"
+    ]
+  },
+  {
+    "query": "What is voltage?",
+    "error_type": "retrieval",
+    "retrieved": [
+      "doc1.pdf_def_voltage",
+      "doc1.pdf_p3_c0"
+    ],
+    "expected": [
+      "doc1.pdf_def_voltage"
+    ]
+  },
+  {
+    "query": "What does Ohm's law state?",
+    "error_type": "retrieval",
+    "retrieved": [
+      "doc1.pdf_def_voltage",
+      "doc1.pdf_p3_c0"
+    ],
+    "expected": [
+      "doc1.pdf_p3_c0"
+    ]
+  },
+  {
+    "query": "What is voltage?",
+    "error_type": "retrieval",
+    "retrieved": [
+      "doc1.pdf_def_voltage",
+      "doc1.pdf_p3_c0",
+      "doc1.pdf_p1_c0"
+    ],
+    "expected": [
+      "doc1.pdf_def_voltage"
+    ]
+  },
+  {
+    "query": "What does Ohm's law state?",
+    "error_type": "retrieval",
+    "retrieved": [
+      "doc1.pdf_def_voltage",
+      "doc1.pdf_p3_c0",
+      "doc1.pdf_p1_c0"
+    ],
+    "expected": [
+      "doc1.pdf_p3_c0"
+    ]
+  },
+  {
+    "query": "What is voltage?",
+    "error_type": "retrieval",
+    "retrieved": [
+      "doc1.pdf_def_voltage"
+    ],
+    "expected": [
+      "doc1.pdf_def_voltage"
+    ]
+  },
+  {
+    "query": "What does Ohm's law state?",
+    "error_type": "retrieval",
+    "retrieved": [
+      "doc1.pdf_p3_c0"
+    ],
+    "expected": [
+      "doc1.pdf_p3_c0"
+    ]
+  }
+]

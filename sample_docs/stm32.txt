@@ -1,0 +1,8 @@
+STM32 Microcontroller Specifications
+
+Voltage = 3.3V
+Current = 50mA
+Frequency = 72MHz
+
+The STM32 series is designed for low-power embedded applications.
+It is commonly used in IoT and industrial systems.

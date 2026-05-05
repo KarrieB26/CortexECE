@@ -1,0 +1,8 @@
+Arduino Uno Specifications
+
+Voltage = 5V
+Current = 45mA
+Frequency = 16MHz
+
+Arduino is widely used for beginner embedded systems projects.
+It has a simple programming environment.
