@@ -11,3 +11,6 @@ uvicorn
 easyocr
 pytesseract
 opencv-python
+sentence-transformers
+python-dotenv
+transformers 
